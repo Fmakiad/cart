@@ -1,4 +1,4 @@
-import { Button, Typography, Spinner, } from "@material-tailwind/react"
+import { Button, Typography, Spinner, Badge, Tooltip, IconButton } from "@material-tailwind/react"
 import { ShoppingCart, ShoppingBag, Plus } from "lucide-react"
 import Cart from "./Cart"
 import { toast } from 'react-toastify'
@@ -45,16 +45,41 @@ const Products = () => {
           </Typography>
         </div>
         {!showModel && (
-          <Button
-            color=""
-            className="relative flex items-center justify-center gap-2 px-4 py-2 bg-[#d78850] font-bold uppercase rounded-full h-16 w-16 hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-            onClick={toggle}
-          >
-            <ShoppingCart color="#fff" />{" "}
-            <p className="text-white">
-              {cartItems.length}
-            </p>
-          </Button>
+          <Tooltip>
+            <Tooltip.Trigger>
+              <button variant="ghost" className="bg-none focus:outline-none p-2" onClick={toggle}>
+              <Badge>
+                <Badge.Content>
+                  <IconButton color="secondary">
+                    <ShoppingCart
+                      color="#D78850"
+                      className="h-4 w-4 stroke-2"
+                    />
+                  </IconButton>
+                </Badge.Content>
+                <Badge.Indicator className="bg-[#D78850] border-none">
+                  <p>{cartItems.length}</p>
+                </Badge.Indicator>
+              </Badge>
+              </button>
+            </Tooltip.Trigger>
+            <Tooltip.Content className="bg-[#D78850]">My Cart</Tooltip.Content>
+          </Tooltip>
+          // <Tooltip>
+          // <Tooltip.Trigger><Button
+          //   color=""
+          //   className="relative flex items-center justify-center gap-2 px-4 py-2 bg-[#d78850] font-bold uppercase rounded-full h-16 w-16 hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+          //   onClick={toggle}
+          // >
+          //   <ShoppingCart color="#fff" />{" "}
+          //   <p className="text-white">
+          //     {cartItems.length}
+          //   </p>
+          // </Button> </Tooltip.Trigger>
+          // <Tooltip.Content className="bg-gray-700">
+          //   My Cart
+          // </Tooltip.Content>
+          // </Tooltip>
         )}
       </div>
 
@@ -79,7 +104,7 @@ const Products = () => {
               <p className="mt-2 textgray-600">ZMK{product.price}</p>
             </div>
             <div className="flex justify-between items-center py-5">
-              <Button 
+              <Button
                 variant="outline"
                 color="#D78850"
                 size="sm"
@@ -87,7 +112,7 @@ const Products = () => {
                 onClick={() => addToCart(product)}
               >
                 Add to cart
-                <Plus  className="h-4"/>
+                <Plus className="h-4" />
               </Button>
             </div>
           </div>
