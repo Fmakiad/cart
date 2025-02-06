@@ -16,10 +16,11 @@ const App = () => {
     <div>
         <ToastContainer
           position="top-center"
-          autoClose={3000}
+          autoClose={2000}
           hideProgressBar={false}
           closeOnClick
           pauseOnHover
+          // toastStyle={{backgroundColor: '#555', color: '#fff', fontSize: '12px', padding: "12px 14px"}}
         />
       </div>
       </>

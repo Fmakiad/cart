@@ -10,6 +10,7 @@ const Products = () => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
     const [showModel, setShowModel] = useState(false)
     const {cartItems, addToCart } = useContext(CartContext)
 
@@ -44,10 +45,11 @@ const Products = () => {
             Stella
           </Typography>
         </div>
+
         {!showModel && (
           <Tooltip>
             <Tooltip.Trigger>
-              <button variant="ghost" className="bg-none focus:outline-none p-2" onClick={toggle}>
+              <Button isCircular variant="ghost" color="secondary" className="bg-none focus:outline-none p-2" onClick={() => setIsOpen(true)}>
               <Badge>
                 <Badge.Content>
                   <IconButton color="secondary">
@@ -61,29 +63,15 @@ const Products = () => {
                   <p>{cartItems.length}</p>
                 </Badge.Indicator>
               </Badge>
-              </button>
+              </Button>
             </Tooltip.Trigger>
             <Tooltip.Content className="bg-[#D78850]">My Cart</Tooltip.Content>
           </Tooltip>
-          // <Tooltip>
-          // <Tooltip.Trigger><Button
-          //   color=""
-          //   className="relative flex items-center justify-center gap-2 px-4 py-2 bg-[#d78850] font-bold uppercase rounded-full h-16 w-16 hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-          //   onClick={toggle}
-          // >
-          //   <ShoppingCart color="#fff" />{" "}
-          //   <p className="text-white">
-          //     {cartItems.length}
-          //   </p>
-          // </Button> </Tooltip.Trigger>
-          // <Tooltip.Content className="bg-gray-700">
-          //   My Cart
-          // </Tooltip.Content>
-          // </Tooltip>
+        
         )}
       </div>
 
-      <div className="grid sm:grid-cols-2 mg:grind-cols-3 lg:grid-cols-4 gap-4 px-10">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
         {products.map((product) => (
           <div key={product.id} className="bg-white shadow-md rounded-lg p-5">
             <img
@@ -118,7 +106,7 @@ const Products = () => {
           </div>
         ))}
       </div>
-      <Cart showModel={showModel} toggle={toggle} />
+      <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }
